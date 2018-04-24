@@ -1,0 +1,21 @@
+{% extends 'blog/base.html' %}
+
+{% block title_block %}
+	Статья
+{% endblock %}
+
+{% block body_block %}
+	<div class="col-9">
+		{{ article.text }}
+	</div>
+	<div class="col-3">
+		<div class="card">
+			<div class="card-header">
+				Реклама
+			</div>
+			<div class="card-body">
+				<p> Место для вашей рекламы:)</p>
+			</div>
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,94 @@
+{% extends 'blog/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+	Главная
+{% endblock %}
+
+{% block navbar_block %}
+	{% if request.user.is_authenticated %}
+		<li class="nav-item">
+			<a class="nav-link" href="#">Создать блог</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="#">Добавить статью</a>
+		</li>
+	{% endif %}
+{% endblock %}
+
+
+{% block header_block %}
+		{% if request.user.is_authenticated %}
+			<div> Привет, {{ request.user }}</div>
+			<a href="{% url 'logout' %}">Выйти </a>
+		{% else %}
+		<form class="form-inline" action="{% url 'login' %}" method="POST">
+			{% csrf_token %}
+			<label class="mr-sm-2 mb-0 sr-only" for="username"> Username</label>
+			<input type="text" class="form-control-sm mr-sm-2 mb-2 mb-sm-0" id="username" name="username" placeholder="Username" required>
+			<label class="mr-sm-2 mb-0 sr-only" for="password">Password</label>
+			<input type="password" class="form-control-sm mr-sm-2 mb=2 ms-sm-0" id="password" name="password" placeholder="Password" required>
+			<button type="submit" class="btn btn-primary btn-sm mt-2 mt-sm-0">Войти</button>
+		</form>
+		<a class="btn btn-primary btn-sm ml-1" href="{% url 'register' %}" role="button">Регистрация</a>
+
+		{% endif %}
+{% endblock %}
+
+
+
+{% block body_block %}
+
+	<div class="col-9">
+		{% for article in articles %}
+			<div>
+				<a href="{% url 'article' number=article.id %}"><h2>{{ article.title }}</h2></a>
+				<p> {{ article.text|slice:":300" }}... <a href="{% url 'article' number=article.id %}">Читать далее</a></p>
+				<div class="text-right">
+					<b>Автор:</b> {{ article.blog.owner.username }}
+					<b>Блог:</b> {{ article.blog.name }}
+					<b>Дата:</b> {{ article.date }}
+				</div>
+				<hr>
+				<br>
+			</div>
+		{% endfor %}
+		
+		<div class="pagination">
+			<span class="step-links">
+				{% if articles.has_previous %}
+					<a href="?page=1">&laquo; first</a>
+					<a href="?page={{ articles.previous_page_number}}">previous</a>
+				{% endif %}
+				
+				<span class="current">
+					Page {{ articles.number }} of {{ articles.paginator.num_pages }}.
+				</span>
+				
+				{% if articles.has_next %}
+					<a href="?page={{ articles.next_page_number }}">next</a>
+					<a href="?page={{ articles.paginator.num_pages }}">last &raquo;</a>
+				{% endif %}
+			</span>
+		</div>
+	</div>
+	<div class="col-3">
+		<div class="card">
+			<div class="card-header">
+				Лучшее за сутки
+			</div>
+			<div class="card-body">
+				<p> список</p>
+			</div>
+		</div>
+		<div class="card">
+			<div class="card-header">
+				Реклама
+			</div>
+			<div class="card-body">
+				<p> Место для вашей рекламы:)</p>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
