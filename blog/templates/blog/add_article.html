@@ -1,0 +1,43 @@
+{% extends 'blog/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+	Добавить статью
+{% endblock %}
+
+
+{% block body_block %}
+	{% if success %}
+		<div class="alert alert-success alert-dismissible fade show" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			Статья опубликована!
+		</div>
+	{% endif %}
+		
+<div class="container">
+	<form method="POST" action="{% url 'add_article' %}">
+		{% csrf_token %}
+		{{ article_form.as_p }}
+		
+		{{ tag_formset.management_form }}
+		Введите тэг
+		{% for tag in tag_formset %}
+			<div class="tag-formset">
+				{{ tag.name }}
+			</div>
+		{% endfor %}
+		<br/>
+		<button class="btn btn-secondary" type="submit">Опубликовать</button>
+	</form>
+</div>
+
+<script src="{% static 'js/jquery.formset.js' %}"></script>
+<script>
+	$('.tag-formset').formset({
+		addText: 'Еще тэг',
+		deleteText: 'Удалить'
+	});
+</script>
+{% endblock %}

@@ -2,10 +2,69 @@
 	margin: 0px 0px 0px 0px;
 }
 nav {
-	background: coral;
 	height: 80px;
 }
 
 .logo{
 	height: 60px;
+}
+
+
+.body-area{
+	margin-top:20px;
+}
+
+.articles-area{
+	border-radius: 5px;
+	border: 1px solid #dfdfdf;
+}
+
+.card{
+	margin-bottom: 10px;
+}
+a.title{
+	color: #2e2529;
+}
+
+a:hover{
+	color: black;
+	text-decoration: none;
+
+}
+
+.read{
+	color:blue;
+}
+.nav-link{
+	color: black;
+}
+
+.greeting{
+	color: rgba(255,255,255,.5);	
+}
+
+/* form */
+textarea, .alert{
+	width:100%;
+}
+
+
+/* paginator */
+.page-item .page-link{
+	background-color: #f7f7f7;
+	border-color: #939c99;
+	color: #798a99;
+}
+
+.page-item .page-link:hover{
+	color: black;
+}
+
+.page-item.active .page-link{
+	background-color: #343a40;
+	border-color: #939c99;
+}
+
+.page-item.active .page-link:hover{
+	color: #f7f7f7;
 }

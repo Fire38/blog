@@ -6,9 +6,8 @@
 {% endblock %}
 
 {% block body_block %}
-	<div class="row">
-		<div class="col-2"></div>
-		<div class="col-4">
+
+		<div class="col-12">
 			<form action="{% url 'register' %}" method="POST">
 				{% csrf_token %}
 				{% for field in form %}
@@ -24,11 +23,10 @@
 
 				<div class="form-group row">
 					<div class="offset-xs-3 col-xs-9">
-						<button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+						<button type="submit" class="btn btn-secondary">Зарегистрироваться</button>
 					</div>
 				</div>
 			</form>
 		</div>
-		<div class="col-4"></div>
-	</div>
+
 {% endblock %}

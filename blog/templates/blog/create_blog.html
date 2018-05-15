@@ -1,0 +1,25 @@
+{% extends 'blog/base.html' %}
+
+{% block title_block %}
+	Создать блог
+{% endblock %}
+
+{% block body_block %}
+{% if success %}
+	<div class="alert alert-success alert-dismissible fade show" role="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+		Блог успешно создан
+	</div>
+
+{% endif %}
+
+<div class="col-12">
+	<form method="POST" action="{% url 'create_blog' %}">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<button class="btn btn-secondary" type="submit">Создать</button>
+	</form>
+</div>
+{% endblock %}
